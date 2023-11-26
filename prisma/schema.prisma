@@ -10,25 +10,10 @@ datasource db {
   url      = env("DB_URL")
 }
 
-model User {
+model VoteHistory {
   id        String    @id @default(uuid())
-  name      String
-  email     String?    @unique
-  password  String    
-  role      String    @default("user")
-  createdAt DateTime  @default(now())
-  updateAt  DateTime  @default(now())
-  isEmailVerified Boolean @default(false)
-  tokens    Token[]
-}
-model Token {
-  id        String    @id @default(uuid())
-  token     String    @db.VarChar(400)
-  userId    String    
-  User      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  type      String
-  expires   DateTime
-  blacklisted Boolean @default(false)
-  createdAt DateTime  @default(now())
-  updateAt  DateTime  @default(now())
+  voters    String
+  candidate String    
+  round     Int    
+  timestamp Int       
 }
