@@ -16,7 +16,13 @@ const createVoteHistory = async (dataBody) => {
  * @returns {Promise<QueryResult>}
  */
 const queryVoteHistory = async () => {
-  const result = await prisma.voteHistory.findMany();
+  const result = await prisma.voteHistory.findMany({
+    orderBy: [
+        {
+            timestamp: 'desc'
+        }
+    ]
+  });
   return result;
 };
 
